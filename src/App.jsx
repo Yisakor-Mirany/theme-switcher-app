@@ -4,20 +4,20 @@ import ThemeSwitcher from './ThemeSwitcher'
 import './App.css'
 
 export default function App() {
-  const { themeName, theme } = useContext(ThemeContext)
+  const { currentTheme, themeStyles } = useContext(ThemeContext)
 
   return (
     <div
-      className={`app-layout ${themeName}-mode`}
+      className={`app-layout ${currentTheme}-mode`}
       style={{
-        '--bg': theme.background,
-        '--surface': theme.surface,
-        '--text': theme.text,
-        '--subtext': theme.subtext,
-        '--border': theme.border,
-        '--accent': theme.accent,
-        '--accent-hover': theme.accentHover,
-        '--shadow': theme.shadow,
+        '--bg': themeStyles.background,
+        '--surface': themeStyles.surface,
+        '--text': themeStyles.text,
+        '--subtext': themeStyles.subtext,
+        '--border': themeStyles.border,
+        '--accent': themeStyles.accent,
+        '--accent-hover': themeStyles.accentHover,
+        '--shadow': themeStyles.shadow,
       }}
     >
       <header className="app-header">

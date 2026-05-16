@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 export const themes = {
   light: {
@@ -28,20 +28,27 @@ export const themes = {
 export const ThemeContext = createContext(null)
 
 export function ThemeProvider({ children }) {
-  const [themeName, setThemeName] = useState(() => {
+  const [currentTheme, setCurrentTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light'
   })
 
   useEffect(() => {
-    localStorage.setItem('theme', themeName)
-  }, [themeName])
+    localStorage.setItem('theme', currentTheme)
+  }, [currentTheme])
 
   const toggleTheme = () => {
-    setThemeName(prev => (prev === 'light' ? 'dark' : 'light'))
+    setCurrentTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
   }
 
   return (
-    <ThemeContext.Provider value={{ themeName, theme: themes[themeName], toggleTheme }}>
+    <ThemeContext.Provider
+      value={{
+        currentTheme,
+        theme: currentTheme,
+        themeStyles: themes[currentTheme],
+        toggleTheme,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   )

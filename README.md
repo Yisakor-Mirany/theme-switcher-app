@@ -6,7 +6,7 @@ A React + Vite application that demonstrates **global theme management** using t
 
 ## What the project does
 
-- Provides a global `ThemeContext` that exposes the current theme object and a `toggleTheme` function to every component in the tree.
+- Provides a global `ThemeContext` that exposes the current theme string, theme styles, and a `toggleTheme` function to every component in the tree.
 - Renders a header toggle button that switches between **☀️ Light Mode** and **🌙 Dark Mode**.
 - Applies a `.light-mode` or `.dark-mode` CSS class to the root layout and uses CSS custom properties (`--bg`, `--text`, `--accent`, …) driven by the active theme, so all colours update in a single render cycle.
 - Saves the selected theme name to `localStorage` so the same theme is restored on next visit.
@@ -66,13 +66,13 @@ src/
 ### `ThemeContext.jsx`
 Defines two theme objects (`light` / `dark`) and exports:
 - `ThemeContext` — the context object passed to `useContext`.
-- `ThemeProvider` — a wrapper component that holds the active theme in `useState`, syncs it to `localStorage` via `useEffect`, and exposes `{ themeName, theme, toggleTheme }` through the provider value.
+- `ThemeProvider` — a wrapper component that holds the active theme in `useState`, syncs it to `localStorage` via `useEffect`, and exposes `{ currentTheme, theme, themeStyles, toggleTheme }` through the provider value.
 
 ### `ThemeSwitcher.jsx`
-Reads `themeName` and `toggleTheme` from `ThemeContext` via `useContext`. Renders a single button whose label changes based on the current theme.
+Reads `currentTheme` and `toggleTheme` from `ThemeContext` via `useContext`. Renders a single button whose label changes based on the current theme.
 
 ### `App.jsx`
-Reads the active `theme` object and applies its colour values as inline CSS custom properties on the root `<div>`, together with a dynamic `light-mode` / `dark-mode` class. All child elements inherit these variables through the cascade.
+Reads the active `themeStyles` object and applies its colour values as inline CSS custom properties on the root `<div>`, together with a dynamic `light-mode` / `dark-mode` class. All child elements inherit these variables through the cascade.
 
 ---
 

@@ -2,8 +2,8 @@ import { useContext } from 'react'
 import { ThemeContext } from './ThemeContext'
 
 export default function ThemeSwitcher() {
-  const { themeName, toggleTheme } = useContext(ThemeContext)
-  const isDark = themeName === 'dark'
+  const { currentTheme, toggleTheme } = useContext(ThemeContext)
+  const isDark = currentTheme === 'dark'
 
   return (
     <button
